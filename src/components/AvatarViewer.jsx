@@ -230,14 +230,24 @@ function GLBModel({ url }) {
 
 export default function AvatarViewer({ modelUrl = '/models/dadapeer_avatar.glb', className = '' }) {
   const [modelStatus, setModelStatus] = useState('loading')
+  const lastTapRef = useRef(0)
   const router = useRouter()
 
   const handleAdminTrigger = (e) => {
     if (e) {
       e.stopPropagation()
-      e.preventDefault()
+      // e.preventDefault() is not always available on synthetic R3F events, but we stop propagation.
     }
     router.push('/admin/login')
+  }
+
+  const handlePointerDown = (e) => {
+    e.stopPropagation()
+    const now = Date.now()
+    if (now - lastTapRef.current < 300) {
+      handleAdminTrigger(e)
+    }
+    lastTapRef.current = now
   }
 
   const handleKeyDown = (e) => {
@@ -267,24 +277,16 @@ export default function AvatarViewer({ modelUrl = '/models/dadapeer_avatar.glb',
     <div 
       style={{ width: '100%', height: '100%', minHeight: 320, cursor: 'pointer', outline: 'none' }} 
       className={className}
-      onDoubleClick={handleAdminTrigger}
-      onTouchStart={(e) => {
-        // Simple double tap detection
-        const now = Date.now()
-        const last = e.currentTarget.lastTap || 0
-        if (now - last < 300) handleAdminTrigger(e)
-        e.currentTarget.lastTap = now
-      }}
       tabIndex={0}
       onKeyDown={handleKeyDown}
       role="button"
-      aria-label="Interactive character. Double click or press Enter for backstage."
+      aria-label="Interactive character. Double tap or press Enter for backstage."
     >
       <Canvas
         camera={{ position: [0, 0.3, 3.5], fov: 45 }}
         shadows
         dpr={[1, 2]}
-        style={{ width: '100%', height: '100%', outline: 'none' }}
+        style={{ width: '100%', height: '100%', outline: 'none', touchAction: 'none' }}
       >
         <ambientLight intensity={0.5} />
         {/* Cinematic Key Light */}
@@ -300,13 +302,15 @@ export default function AvatarViewer({ modelUrl = '/models/dadapeer_avatar.glb',
 
         <Suspense fallback={null}>
           {modelStatus !== 'loading' && (
-            <Float speed={1.2} rotationIntensity={0.05} floatIntensity={0.1}>
-              {modelStatus === 'success' ? (
-                <GLBModel url={modelUrl} />
-              ) : (
-                <FallbackCharacter />
-              )}
-            </Float>
+            <group onDoubleClick={handleAdminTrigger} onPointerDown={handlePointerDown}>
+              <Float speed={1.2} rotationIntensity={0.05} floatIntensity={0.1}>
+                {modelStatus === 'success' ? (
+                  <GLBModel url={modelUrl} />
+                ) : (
+                  <FallbackCharacter />
+                )}
+              </Float>
+            </group>
           )}
         </Suspense>
 
