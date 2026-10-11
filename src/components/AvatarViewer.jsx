@@ -33,298 +33,325 @@ function FallbackCharacter() {
     }
   })
 
-  // Refined Stylized Character Shaders & Materials (Matte, warm, cinematic)
+  // Stylized LookDev Materials (Warm golden-hour skin, realistic hair, gold metal, tinted glass)
   const skinMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#bd8668',
-    roughness: 0.65,
-    metalness: 0.02
+    color: '#c28562',
+    roughness: 0.58,
+    metalness: 0.04
   })
   
   const hairMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#18181a', 
-    roughness: 0.75, 
-    metalness: 0.05 
-  })
-  
-  const jacketMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#16171a', 
-    roughness: 0.85, 
+    color: '#1a191c', 
+    roughness: 0.68, 
     metalness: 0.08 
   })
+  
+  // Denim / Casual Streetwear Shirt (from reference photo & YouTube style)
+  const denimShirtMaterial = new THREE.MeshStandardMaterial({ 
+    color: '#3d5a80', 
+    roughness: 0.82, 
+    metalness: 0.05 
+  })
 
-  const tshirtMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#2b2d31', 
+  const tshirtInnerMaterial = new THREE.MeshStandardMaterial({ 
+    color: '#1e2229', 
     roughness: 0.9 
   })
 
-  const chainMaterial = new THREE.MeshStandardMaterial({
-    color: '#d4af37',
-    metalness: 0.85,
-    roughness: 0.3
+  const goldFrameMaterial = new THREE.MeshStandardMaterial({
+    color: '#ffd166',
+    metalness: 0.92,
+    roughness: 0.18
+  })
+
+  const lensMaterial = new THREE.MeshPhysicalMaterial({
+    color: '#111317',
+    transmission: 0.45,
+    opacity: 0.92,
+    transparent: true,
+    roughness: 0.12,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1
   })
   
   const scleraMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#f0f0f2', 
-    roughness: 0.2 
+    color: '#f8f8fa', 
+    roughness: 0.15 
   })
 
   const irisMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#2c180e', 
-    roughness: 0.3 
+    color: '#2a170d', 
+    roughness: 0.25 
   })
 
   const pupilMaterial = new THREE.MeshBasicMaterial({ 
-    color: '#0a0a0a' 
+    color: '#080808' 
   })
 
-  const eyeReflectionMaterial = new THREE.MeshBasicMaterial({ 
+  const eyeCatchlightMaterial = new THREE.MeshBasicMaterial({ 
     color: '#ffffff' 
   })
 
   const lipMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#9e5e50', 
-    roughness: 0.6 
+    color: '#b06556', 
+    roughness: 0.52 
   })
 
   const teethMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#f8f8fa', 
-    roughness: 0.3 
+    color: '#ffffff', 
+    roughness: 0.18 
   })
 
   const beardMaterial = new THREE.MeshStandardMaterial({ 
-    color: '#1f1f22', 
-    roughness: 0.85 
+    color: '#1e1c21', 
+    roughness: 0.82 
   })
 
   return (
-    <group ref={groupRef} position={[0, -0.65, 0]} scale={1.22}>
-      {/* ── Streetwear / Casual Developer Outfit ── */}
-      <group position={[0, -0.65, 0]}>
-        {/* Inner Dark T-Shirt */}
-        <mesh position={[0, 0.25, 0.02]}>
-          <cylinderGeometry args={[0.34, 0.42, 0.5, 32]} />
-          <primitive object={tshirtMaterial} attach="material" />
+    <group ref={groupRef} position={[0, -0.68, 0]} scale={1.22}>
+      {/* ── Streetwear / Casual Denim Shirt Outfit ── */}
+      <group position={[0, -0.48, 0]}>
+        {/* Dark Crewneck Inner Shirt */}
+        <mesh position={[0, 0.22, 0.02]}>
+          <cylinderGeometry args={[0.26, 0.34, 0.35, 32]} />
+          <primitive object={tshirtInnerMaterial} attach="material" />
         </mesh>
 
-        {/* Minimalist Gold Chain */}
-        <mesh position={[0, 0.35, 0.15]} rotation={[0.4, 0, 0]}>
-          <torusGeometry args={[0.15, 0.012, 16, 32]} />
-          <primitive object={chainMaterial} attach="material" />
-        </mesh>
-
-        {/* Sleek Outer Jacket Torso */}
+        {/* Denim Outer Shirt Torso */}
         <mesh position={[0, -0.15, 0]}>
-          <cylinderGeometry args={[0.56, 0.68, 0.95, 32]} />
-          <primitive object={jacketMaterial} attach="material" />
+          <cylinderGeometry args={[0.48, 0.58, 0.75, 32]} />
+          <primitive object={denimShirtMaterial} attach="material" />
         </mesh>
 
-        {/* Left Shoulder & Arm */}
-        <mesh position={[-0.56, 0.05, 0]} rotation={[0, 0, 0.18]}>
-          <capsuleGeometry args={[0.18, 0.6, 16, 32]} />
-          <primitive object={jacketMaterial} attach="material" />
+        {/* Left Arm / Shoulder */}
+        <mesh position={[-0.46, 0.02, 0]} rotation={[0, 0, 0.25]}>
+          <capsuleGeometry args={[0.16, 0.52, 16, 32]} />
+          <primitive object={denimShirtMaterial} attach="material" />
         </mesh>
 
-        {/* Right Shoulder & Arm */}
-        <mesh position={[0.56, 0.05, 0]} rotation={[0, 0, -0.18]}>
-          <capsuleGeometry args={[0.18, 0.6, 16, 32]} />
-          <primitive object={jacketMaterial} attach="material" />
+        {/* Right Arm / Shoulder */}
+        <mesh position={[0.46, 0.02, 0]} rotation={[0, 0, -0.25]}>
+          <capsuleGeometry args={[0.16, 0.52, 16, 32]} />
+          <primitive object={denimShirtMaterial} attach="material" />
         </mesh>
 
-        {/* Jacket Collar Left */}
-        <RoundedBox args={[0.1, 0.45, 0.14]} radius={0.03} position={[-0.22, 0.3, 0.16]} rotation={[0.15, 0.2, -0.2]}>
-          <primitive object={jacketMaterial} attach="material" />
+        {/* Left Shirt Collar Lapel */}
+        <RoundedBox args={[0.1, 0.32, 0.1]} radius={0.025} position={[-0.17, 0.22, 0.14]} rotation={[0.18, 0.25, -0.2]}>
+          <primitive object={denimShirtMaterial} attach="material" />
         </RoundedBox>
 
-        {/* Jacket Collar Right */}
-        <RoundedBox args={[0.1, 0.45, 0.14]} radius={0.03} position={[0.22, 0.3, 0.16]} rotation={[0.15, -0.2, 0.2]}>
-          <primitive object={jacketMaterial} attach="material" />
+        {/* Right Shirt Collar Lapel */}
+        <RoundedBox args={[0.1, 0.32, 0.1]} radius={0.025} position={[0.17, 0.22, 0.14]} rotation={[0.18, -0.25, 0.2]}>
+          <primitive object={denimShirtMaterial} attach="material" />
         </RoundedBox>
       </group>
       
-      {/* ── Neck & Adam's Apple ── */}
-      <mesh position={[0, 0.08, 0]}>
-        <cylinderGeometry args={[0.18, 0.21, 0.38, 32]} />
+      {/* ── Neck (Natural human proportions) ── */}
+      <mesh position={[0, -0.06, 0]}>
+        <cylinderGeometry args={[0.17, 0.19, 0.28, 32]} />
         <primitive object={skinMaterial} attach="material" />
       </mesh>
       
-      {/* ── Head Group (Interactive Eye Tracking & Nodding) ── */}
-      <group ref={headRef} position={[0, 0.6, 0]}>
+      {/* ── Head Group (Interactive Cursor / Head Rotation) ── */}
+      <group ref={headRef} position={[0, 0.28, 0]}>
         
-        {/* Cranium / Head Foundation */}
-        <mesh position={[0, 0.05, -0.05]}>
-          <sphereGeometry args={[0.42, 32, 32]} />
+        {/* Cranium / Head Sphere Base */}
+        <mesh position={[0, 0.06, -0.04]}>
+          <sphereGeometry args={[0.39, 32, 32]} />
           <primitive object={skinMaterial} attach="material" />
         </mesh>
 
         {/* Structured Mid-Face & Cheekbones */}
-        <RoundedBox args={[0.62, 0.45, 0.58]} radius={0.16} smoothness={5} position={[0, 0.02, 0.06]}>
+        <RoundedBox args={[0.54, 0.44, 0.5]} radius={0.18} smoothness={5} position={[0, 0.02, 0.05]}>
           <primitive object={skinMaterial} attach="material" />
         </RoundedBox>
 
-        {/* Defined Jawline & Tapered Chin */}
-        <RoundedBox args={[0.44, 0.32, 0.42]} radius={0.14} smoothness={5} position={[0, -0.25, 0.12]}>
+        {/* Sculpted Jawline & Tapered Chin */}
+        <RoundedBox args={[0.38, 0.32, 0.38]} radius={0.14} smoothness={5} position={[0, -0.18, 0.08]}>
           <primitive object={skinMaterial} attach="material" />
         </RoundedBox>
-        <RoundedBox args={[0.24, 0.2, 0.25]} radius={0.08} smoothness={4} position={[0, -0.36, 0.2]}>
-          <primitive object={skinMaterial} attach="material" />
-        </RoundedBox>
-
-        {/* Ears */}
-        <RoundedBox args={[0.06, 0.22, 0.12]} radius={0.03} position={[-0.34, 0.02, -0.02]} rotation={[0.08, -0.2, 0.05]}>
-          <primitive object={skinMaterial} attach="material" />
-        </RoundedBox>
-        <RoundedBox args={[0.06, 0.22, 0.12]} radius={0.03} position={[0.34, 0.02, -0.02]} rotation={[0.08, 0.2, -0.05]}>
+        <RoundedBox args={[0.22, 0.16, 0.22]} radius={0.08} smoothness={4} position={[0, -0.28, 0.14]}>
           <primitive object={skinMaterial} attach="material" />
         </RoundedBox>
 
-        {/* ── Voluminous Textured Modern Hairstyle ── */}
-        {/* Back and side hair base */}
-        <mesh position={[0, 0.14, -0.08]} scale={[1.04, 1.02, 1.02]}>
-          <sphereGeometry args={[0.44, 32, 32]} />
+        {/* Natural Rounded Ears */}
+        <RoundedBox args={[0.05, 0.18, 0.1]} radius={0.025} position={[-0.3, 0.04, -0.02]} rotation={[0.08, -0.18, 0.05]}>
+          <primitive object={skinMaterial} attach="material" />
+        </RoundedBox>
+        <RoundedBox args={[0.05, 0.18, 0.1]} radius={0.025} position={[0.3, 0.04, -0.02]} rotation={[0.08, 0.18, -0.05]}>
+          <primitive object={skinMaterial} attach="material" />
+        </RoundedBox>
+
+        {/* ── Voluminous Layered Wavy Black Hair (Naturally sitting atop forehead & crown) ── */}
+        {/* Hair Back & Crown */}
+        <mesh position={[0, 0.28, -0.09]} scale={[1.04, 1.05, 1.04]}>
+          <sphereGeometry args={[0.41, 32, 32]} />
           <primitive object={hairMaterial} attach="material" />
         </mesh>
-        {/* Top volume */}
-        <RoundedBox args={[0.68, 0.26, 0.7]} radius={0.12} smoothness={5} position={[0, 0.38, -0.02]}>
+        {/* Top Voluminous Wave */}
+        <RoundedBox args={[0.58, 0.24, 0.58]} radius={0.14} smoothness={5} position={[0, 0.48, -0.02]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        {/* Side-swept textured crown (Left to Right flow) */}
-        <RoundedBox args={[0.56, 0.22, 0.54]} radius={0.1} smoothness={5} position={[0.06, 0.45, 0.06]} rotation={[0.08, 0.1, -0.12]}>
+        {/* Stylish Front Quiff & Flow (Sweeping up and over, leaving forehead clear) */}
+        <RoundedBox args={[0.44, 0.18, 0.38]} radius={0.1} smoothness={5} position={[0.06, 0.52, 0.1]} rotation={[0.08, 0.08, -0.12]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        {/* Front stylish quiff wave */}
-        <RoundedBox args={[0.46, 0.16, 0.34]} radius={0.08} smoothness={4} position={[0.08, 0.44, 0.22]} rotation={[0.16, 0.05, -0.14]}>
+        {/* Side-swept textured lock */}
+        <RoundedBox args={[0.32, 0.12, 0.24]} radius={0.06} smoothness={4} position={[0.1, 0.49, 0.19]} rotation={[0.14, 0.04, -0.14]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        {/* Accentuated front lock */}
-        <RoundedBox args={[0.22, 0.12, 0.18]} radius={0.05} smoothness={3} position={[-0.08, 0.39, 0.28]} rotation={[0.2, -0.08, 0.1]}>
+        <RoundedBox args={[0.18, 0.09, 0.16]} radius={0.04} smoothness={3} position={[-0.08, 0.46, 0.22]} rotation={[0.18, -0.08, 0.1]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        {/* Left taper fade */}
-        <RoundedBox args={[0.08, 0.28, 0.38]} radius={0.04} position={[-0.32, 0.14, 0.02]}>
+        {/* Left Side Hair Taper */}
+        <RoundedBox args={[0.07, 0.22, 0.3]} radius={0.035} position={[-0.28, 0.28, 0.01]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        {/* Right taper fade */}
-        <RoundedBox args={[0.08, 0.28, 0.38]} radius={0.04} position={[0.32, 0.14, 0.02]}>
+        {/* Right Side Hair Taper */}
+        <RoundedBox args={[0.07, 0.22, 0.3]} radius={0.035} position={[0.28, 0.28, 0.01]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
 
-        {/* ── Expressive Eyes & Gaze ── */}
+        {/* ── Expressive Eyes Behind Glasses ── */}
         {/* Left Eye */}
-        <group position={[-0.14, 0.06, 0.28]}>
-          {/* Eyeball */}
+        <group position={[-0.13, 0.08, 0.24]}>
           <mesh>
-            <sphereGeometry args={[0.075, 24, 24]} />
+            <sphereGeometry args={[0.065, 24, 24]} />
             <primitive object={scleraMaterial} attach="material" />
           </mesh>
-          {/* Iris */}
-          <mesh position={[0, 0, 0.048]}>
-            <sphereGeometry args={[0.046, 20, 20]} />
+          <mesh position={[0, 0, 0.042]}>
+            <sphereGeometry args={[0.04, 20, 20]} />
             <primitive object={irisMaterial} attach="material" />
           </mesh>
-          {/* Pupil */}
-          <mesh position={[0, 0, 0.062]}>
-            <sphereGeometry args={[0.026, 16, 16]} />
+          <mesh position={[0, 0, 0.054]}>
+            <sphereGeometry args={[0.022, 16, 16]} />
             <primitive object={pupilMaterial} attach="material" />
           </mesh>
-          {/* Specular Catchlight */}
-          <mesh position={[0.016, 0.016, 0.072]}>
-            <sphereGeometry args={[0.01, 8, 8]} />
-            <primitive object={eyeReflectionMaterial} attach="material" />
+          <mesh position={[0.014, 0.014, 0.062]}>
+            <sphereGeometry args={[0.009, 8, 8]} />
+            <primitive object={eyeCatchlightMaterial} attach="material" />
           </mesh>
-          {/* Upper Eyelid / Crease */}
-          <RoundedBox args={[0.15, 0.035, 0.06]} radius={0.015} position={[0, 0.065, 0.03]} rotation={[0, 0, -0.04]}>
-            <primitive object={skinMaterial} attach="material" />
-          </RoundedBox>
         </group>
 
         {/* Right Eye */}
-        <group position={[0.14, 0.06, 0.28]}>
-          {/* Eyeball */}
+        <group position={[0.13, 0.08, 0.24]}>
           <mesh>
-            <sphereGeometry args={[0.075, 24, 24]} />
+            <sphereGeometry args={[0.065, 24, 24]} />
             <primitive object={scleraMaterial} attach="material" />
           </mesh>
-          {/* Iris */}
-          <mesh position={[0, 0, 0.048]}>
-            <sphereGeometry args={[0.046, 20, 20]} />
+          <mesh position={[0, 0, 0.042]}>
+            <sphereGeometry args={[0.04, 20, 20]} />
             <primitive object={irisMaterial} attach="material" />
           </mesh>
-          {/* Pupil */}
-          <mesh position={[0, 0, 0.062]}>
-            <sphereGeometry args={[0.026, 16, 16]} />
+          <mesh position={[0, 0, 0.054]}>
+            <sphereGeometry args={[0.022, 16, 16]} />
             <primitive object={pupilMaterial} attach="material" />
           </mesh>
-          {/* Specular Catchlight */}
-          <mesh position={[0.016, 0.016, 0.072]}>
-            <sphereGeometry args={[0.01, 8, 8]} />
-            <primitive object={eyeReflectionMaterial} attach="material" />
+          <mesh position={[0.014, 0.014, 0.062]}>
+            <sphereGeometry args={[0.009, 8, 8]} />
+            <primitive object={eyeCatchlightMaterial} attach="material" />
           </mesh>
-          {/* Upper Eyelid / Crease */}
-          <RoundedBox args={[0.15, 0.035, 0.06]} radius={0.015} position={[0, 0.065, 0.03]} rotation={[0, 0, 0.04]}>
-            <primitive object={skinMaterial} attach="material" />
-          </RoundedBox>
         </group>
 
         {/* ── Thick Well-Shaped Eyebrows ── */}
-        <RoundedBox args={[0.18, 0.042, 0.035]} radius={0.015} position={[-0.15, 0.165, 0.32]} rotation={[0.06, 0.04, 0.1]}>
+        <RoundedBox args={[0.17, 0.038, 0.03]} radius={0.015} position={[-0.14, 0.17, 0.28]} rotation={[0.06, 0.04, 0.09]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
-        <RoundedBox args={[0.18, 0.042, 0.035]} radius={0.015} position={[0.15, 0.165, 0.32]} rotation={[0.06, -0.04, -0.1]}>
+        <RoundedBox args={[0.17, 0.038, 0.03]} radius={0.015} position={[0.14, 0.17, 0.28]} rotation={[0.06, -0.04, -0.09]}>
           <primitive object={hairMaterial} attach="material" />
         </RoundedBox>
 
-        {/* ── Natural Proportionate Sculpted Nose ── */}
-        {/* Bridge */}
-        <RoundedBox args={[0.058, 0.17, 0.08]} radius={0.025} position={[0, 0.025, 0.315]} rotation={[-0.12, 0, 0]}>
+        {/* ── Iconic Gold-Framed "vibes" Sunglasses ── */}
+        <group position={[0, 0.09, 0.33]}>
+          {/* Left Lens */}
+          <RoundedBox args={[0.22, 0.11, 0.01]} radius={0.035} position={[-0.13, 0, 0]}>
+            <primitive object={lensMaterial} attach="material" />
+          </RoundedBox>
+          <Text position={[-0.13, 0, 0.012]} fontSize={0.042} color="#ffffff" anchorX="center" anchorY="middle">
+            vibes
+          </Text>
+          {/* Left Gold Frame */}
+          <RoundedBox args={[0.235, 0.125, 0.008]} radius={0.04} position={[-0.13, 0, 0.002]}>
+            <primitive object={goldFrameMaterial} attach="material" />
+          </RoundedBox>
+
+          {/* Right Lens */}
+          <RoundedBox args={[0.22, 0.11, 0.01]} radius={0.035} position={[0.13, 0, 0]}>
+            <primitive object={lensMaterial} attach="material" />
+          </RoundedBox>
+          <Text position={[0.13, 0, 0.012]} fontSize={0.042} color="#ffffff" anchorX="center" anchorY="middle">
+            vibes
+          </Text>
+          {/* Right Gold Frame */}
+          <RoundedBox args={[0.235, 0.125, 0.008]} radius={0.04} position={[0.13, 0, 0.002]}>
+            <primitive object={goldFrameMaterial} attach="material" />
+          </RoundedBox>
+
+          {/* Golden Center Bridge */}
+          <mesh position={[0, 0.015, 0]}>
+            <boxGeometry args={[0.05, 0.012, 0.008]} />
+            <primitive object={goldFrameMaterial} attach="material" />
+          </mesh>
+
+          {/* Gold Temples */}
+          <mesh position={[-0.26, 0, -0.15]} rotation={[0, -Math.PI / 2 + 0.12, 0]}>
+            <boxGeometry args={[0.32, 0.01, 0.006]} />
+            <primitive object={goldFrameMaterial} attach="material" />
+          </mesh>
+          <mesh position={[0.26, 0, -0.15]} rotation={[0, Math.PI / 2 - 0.12, 0]}>
+            <boxGeometry args={[0.32, 0.01, 0.006]} />
+            <primitive object={goldFrameMaterial} attach="material" />
+          </mesh>
+        </group>
+
+        {/* ── Proportionate Sculpted Nose ── */}
+        <RoundedBox args={[0.048, 0.13, 0.06]} radius={0.02} position={[0, 0.02, 0.28]} rotation={[-0.08, 0, 0]}>
           <primitive object={skinMaterial} attach="material" />
         </RoundedBox>
-        {/* Nose Tip */}
-        <mesh position={[0, -0.055, 0.355]} scale={[0.055, 0.048, 0.055]}>
+        <mesh position={[0, -0.045, 0.31]} scale={[0.042, 0.038, 0.042]}>
           <sphereGeometry args={[1, 16, 16]} />
           <primitive object={skinMaterial} attach="material" />
         </mesh>
-        {/* Nostril Left */}
-        <mesh position={[-0.042, -0.068, 0.335]} scale={[0.028, 0.025, 0.032]}>
+        <mesh position={[-0.032, -0.055, 0.295]} scale={[0.022, 0.02, 0.024]}>
           <sphereGeometry args={[1, 12, 12]} />
           <primitive object={skinMaterial} attach="material" />
         </mesh>
-        {/* Nostril Right */}
-        <mesh position={[0.042, -0.068, 0.335]} scale={[0.028, 0.025, 0.032]}>
+        <mesh position={[0.032, -0.055, 0.295]} scale={[0.022, 0.02, 0.024]}>
           <sphereGeometry args={[1, 12, 12]} />
           <primitive object={skinMaterial} attach="material" />
         </mesh>
 
-        {/* ── Charming Smile & Lips ── */}
-        {/* Upper Lip */}
-        <RoundedBox args={[0.16, 0.028, 0.025]} radius={0.01} position={[0, -0.155, 0.325]}>
+        {/* ── Charming Smile with Teeth & Lips ── */}
+        {/* Upper Lip (Natural Cupid's Bow curve) */}
+        <RoundedBox args={[0.15, 0.024, 0.02]} radius={0.009} position={[0, -0.118, 0.27]}>
           <primitive object={lipMaterial} attach="material" />
         </RoundedBox>
-        {/* Subtle confident white teeth peek */}
-        <mesh position={[0, -0.175, 0.32]}>
-          <boxGeometry args={[0.11, 0.02, 0.015]} />
+        {/* Bright Confident Curved Teeth Smile */}
+        <mesh position={[0, -0.134, 0.268]}>
+          <boxGeometry args={[0.12, 0.024, 0.016]} />
           <primitive object={teethMaterial} attach="material" />
         </mesh>
         {/* Lower Lip */}
-        <RoundedBox args={[0.15, 0.032, 0.03]} radius={0.012} position={[0, -0.195, 0.325]}>
+        <RoundedBox args={[0.14, 0.028, 0.024]} radius={0.01} position={[0, -0.156, 0.27]}>
           <primitive object={lipMaterial} attach="material" />
         </RoundedBox>
 
-        {/* ── Groomed Moustache & Stubble Beard ── */}
-        {/* Clean Moustache */}
-        <RoundedBox args={[0.22, 0.032, 0.02]} radius={0.01} position={[0, -0.13, 0.335]} rotation={[-0.05, 0, 0]}>
+        {/* ── Clean Groomed Moustache & Stubble Beard ── */}
+        {/* Moustache */}
+        <RoundedBox args={[0.2, 0.026, 0.016]} radius={0.008} position={[0, -0.095, 0.282]} rotation={[-0.04, 0, 0]}>
           <primitive object={beardMaterial} attach="material" />
         </RoundedBox>
         {/* Soul Patch */}
-        <mesh position={[0, -0.23, 0.33]} scale={[0.028, 0.028, 0.008]}>
+        <mesh position={[0, -0.18, 0.27]} scale={[0.022, 0.022, 0.006]}>
           <sphereGeometry args={[1, 12, 12]} />
           <primitive object={beardMaterial} attach="material" />
         </mesh>
         {/* Chin Stubble / Trimmed Beard */}
-        <RoundedBox args={[0.22, 0.09, 0.16]} radius={0.035} position={[0, -0.32, 0.24]}>
+        <RoundedBox args={[0.18, 0.065, 0.12]} radius={0.025} position={[0, -0.24, 0.2]}>
           <primitive object={beardMaterial} attach="material" />
         </RoundedBox>
-        {/* Jawline Beard Lines */}
-        <RoundedBox args={[0.3, 0.05, 0.2]} radius={0.025} position={[0, -0.27, 0.16]}>
+        {/* Jawline Beard Outline */}
+        <RoundedBox args={[0.26, 0.04, 0.16]} radius={0.02} position={[0, -0.2, 0.14]}>
           <primitive object={beardMaterial} attach="material" />
         </RoundedBox>
       </group>
@@ -434,30 +461,27 @@ export default function AvatarViewer({ modelUrl = '/models/dadapeer_avatar.glb',
         dpr={[1, 2]}
         style={{ width: '100%', height: '100%', outline: 'none', touchAction: 'none' }}
       >
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1.2} />
+        <hemisphereLight skyColor="#ffe4d6" groundColor="#331818" intensity={1.1} />
         {/* Cinematic Key Light */}
-        <directionalLight position={[4, 6, 4]} intensity={2.5} castShadow shadow-mapSize={[1024, 1024]} />
+        <directionalLight position={[4, 6, 4]} intensity={2.6} castShadow shadow-mapSize={[1024, 1024]} />
         {/* Soft Fill Light */}
-        <directionalLight position={[-4, 2, 1]} intensity={0.8} color="#e0f2fe" />
+        <directionalLight position={[-4, 2, 2]} intensity={1.2} color="#e0f2fe" />
         {/* Rim Light for depth */}
-        <pointLight position={[0, 4, -3]} intensity={3} color="#fef08a" />
+        <pointLight position={[0, 4, -3]} intensity={3.5} color="#fef08a" />
         {/* Red circle integration lighting */}
-        <pointLight position={[0, -1, -1]} intensity={1.5} color="#D91F25" />
-        
-        <Environment preset="studio" blur={0.5} />
+        <pointLight position={[0, -1, -1]} intensity={2.0} color="#D91F25" />
 
         <Suspense fallback={null}>
-          {modelStatus !== 'loading' && (
-            <group onDoubleClick={handleAdminTrigger} onPointerDown={handlePointerDown}>
-              <Float speed={1.2} rotationIntensity={0.05} floatIntensity={0.1}>
-                {modelStatus === 'success' ? (
-                  <GLBModel url={modelUrl} />
-                ) : (
-                  <FallbackCharacter />
-                )}
-              </Float>
-            </group>
-          )}
+          <group onDoubleClick={handleAdminTrigger} onPointerDown={handlePointerDown}>
+            <Float speed={1.2} rotationIntensity={0.05} floatIntensity={0.1}>
+              {modelStatus === 'success' ? (
+                <GLBModel url={modelUrl} />
+              ) : (
+                <FallbackCharacter />
+              )}
+            </Float>
+          </group>
         </Suspense>
 
         <OrbitControls
