@@ -24,13 +24,13 @@ export default function AboutSection({ settings = {} }) {
 
         {/* Right — text */}
         <div className="about-text">
-          <p className="about-section-label">01 / About</p>
+          <p className="about-section-label">01 // ABOUT</p>
           <h2 className="about-heading">
             BUILDER FIRST.<br />
             <span className="highlight">STUDENT</span> ALWAYS.
           </h2>
           <p className="about-bio">
-            {settings.about_text || "I'm an Information Science and Engineering student at CMR Institute of Technology, Bengaluru. I build full-stack and AI products, design digital brands, and run two ventures — Alona Label and Milky Mirchi."}
+            {settings.about_text || "Driven student & full-stack developer at CMRIT Bengaluru building digital experiences that feel alive. Creating brands. Turning ideas into reality."}
           </p>
 
           {/* Stats */}
@@ -51,18 +51,15 @@ export default function AboutSection({ settings = {} }) {
 
           {/* Code card */}
           <div className="code-card">
-            <div><span className="code-key">const </span><span style={{ color: 'var(--white)' }}>dadapeer</span> = {'{'}</div>
+            <div><span className="code-key">const </span><span style={{ color: 'var(--lime)' }}>developer</span> = {'{'}</div>
             <div style={{ paddingLeft: '1.25rem' }}>
-              <span className="code-key">name</span>: <span style={{ color: 'var(--lime)' }}>"Dadapeer K"</span>,
+              <span className="code-key">skills</span>: <span style={{ color: 'var(--white)' }}>["React", "Next.js", "AI"]</span>,
             </div>
             <div style={{ paddingLeft: '1.25rem' }}>
-              <span className="code-key">study</span>: <span style={{ color: 'var(--lime)' }}>"ISE · CMRIT Bengaluru"</span>,
+              <span className="code-key">passion</span>: <span style={{ color: 'var(--lime)' }}>"Clean UI / UX"</span>,
             </div>
             <div style={{ paddingLeft: '1.25rem' }}>
-              <span className="code-key">builds</span>: <span style={{ color: 'var(--white)' }}>["full-stack apps", "AI products"]</span>,
-            </div>
-            <div style={{ paddingLeft: '1.25rem' }}>
-              <span className="code-key">ventures</span>: <span style={{ color: 'var(--white)' }}>["Alona Label", "Milky Mirchi"]</span>
+              <span className="code-key">motto</span>: <span style={{ color: 'var(--white)' }}>"Always build, always learn."</span>
             </div>
             <div>{'}'}</div>
           </div>

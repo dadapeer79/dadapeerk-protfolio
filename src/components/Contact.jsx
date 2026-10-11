@@ -8,7 +8,6 @@ export default function Contact({ settings = {} }) {
 
   const validate = () => {
     const e = {}
-    if (!form.name.trim()) e.name = 'Name is required'
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Valid email required'
     if (!form.message.trim() || form.message.trim().length < 10) e.message = 'Message must be at least 10 characters'
     return e
@@ -16,6 +15,7 @@ export default function Contact({ settings = {} }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!form.name.trim()) form.name = form.email ? form.email.split('@')[0] : 'Visitor'
     const errs = validate()
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setErrors({})
@@ -59,7 +59,7 @@ export default function Contact({ settings = {} }) {
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
-              <div className="form-group">
+              <div className="form-group contact-name-group">
                 <label style={{ fontSize: '0.75rem', color: 'rgba(250,246,238,0.65)', fontWeight: 600, marginBottom: '0.25rem', display: 'block' }}>
                   Name
                 </label>

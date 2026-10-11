@@ -15,13 +15,13 @@ export default function HeroSection({ settings = {} }) {
   return (
     <section className="hero" id="home">
 
-      {/* Layer 0 — full-width background typography */}
+      {/* Layer 0 — full-width background typography (Desktop) */}
       <div className="hero-bg-text" aria-hidden="true">
         <div className="hero-bg-creative">CREATIVE</div>
         <div className="hero-bg-developer">DEVELOPER</div>
       </div>
 
-      {/* Layer 1 — top bar (label + sticker) */}
+      {/* Layer 1 — top bar (Desktop) */}
       <div className="hero-topbar">
         <div className="hero-label-pill">
           <span className="hero-label-dot" />
@@ -35,7 +35,25 @@ export default function HeroSection({ settings = {} }) {
         </div>
       </div>
 
-      {/* Layer 2 — center: red circle + avatar */}
+      {/* Mobile-only pill badge */}
+      <div className="hero-mobile-pill">
+        <span className="hero-mobile-pill-dot" />
+        DEVELOPER / DESIGNER / AI BUILDER
+      </div>
+
+      {/* Mobile-only name and avatar section */}
+      <div className="hero-mobile-main-row">
+        <div className="hero-mobile-typography">
+          <div className="hero-m-dada">DADA</div>
+          <div className="hero-m-peer-wrap">
+            <span className="hero-m-peer">PEER</span>
+            <span className="hero-m-sticker">Full Stack Developer</span>
+          </div>
+          <div className="hero-m-k">K</div>
+        </div>
+      </div>
+
+      {/* Layer 2 — center: red circle + avatar (shared / responsive) */}
       <div className="hero-center-stage">
         <div className="hero-red-circle" />
         <div className="hero-avatar-wrap">
@@ -43,7 +61,7 @@ export default function HeroSection({ settings = {} }) {
         </div>
       </div>
 
-      {/* Layer 2b — floating preview panel, right of center (absolute to section) */}
+      {/* Layer 2b — floating preview panel */}
       <div className="hero-preview-panel">
         <div className="preview-chrome">
           <div className="preview-dot" style={{ background: '#FF5F57' }} />
@@ -69,7 +87,14 @@ export default function HeroSection({ settings = {} }) {
         </div>
       </div>
 
-      {/* Layer 3 — bottom bar */}
+      {/* Mobile CTA */}
+      <div className="hero-mobile-cta">
+        <a href="#work" className="btn btn-black btn-lg">
+          {settings.cta_primary || 'EXPLORE MY WORLD →'}
+        </a>
+      </div>
+
+      {/* Layer 3 — bottom bar (Desktop) */}
       <div className="hero-bottom-bar">
         <div className="hero-bottom-left">
           <p className="hero-sub">
